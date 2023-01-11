@@ -233,22 +233,20 @@ resource "aws_kms_alias" "secret" {
 resource "aws_secretsmanager_secret" "secret" {
   description         = var.secret_description
   kms_key_id          = aws_kms_key.secret.key_id
-  name                = var.name
+  name                = var.secret_name
   rotation_lambda_arn = aws_lambda_function.rotate-code-mysql.arn
   rotation_rules {
     automatically_after_days = var.rotation_days
   }
-  #tags                = "${var.tags}"
-  #policy =
 }
 
 resource "aws_secretsmanager_secret_version" "secret" {
   lifecycle {
     ignore_changes = [
-      secret_string
+      "secret_string"
     ]
   }
-  secret_id     = "${aws_secretsmanager_secret.secret.id}"
+  secret_id     = aws_secretsmanager_secret.secret.id
   secret_string = <<EOF
 {
   "username": "${var.mysql_username}",
