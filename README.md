@@ -11,7 +11,6 @@ module "secret-manager-with-rotation" {
   source                     = "giuseppeborgese/secret-manager-with-rotation/aws"
   version                    = "<always choose the latest version displayed in the upper right corner of this page>"
   name                       = "PassRotation" #name of function and other resources
-  secret_name                = "my_secret_name" #name of the secret in the AWS Secrets Manager
   rotation_days              = 1
   subnets_lambda             = ["subnet-xxxxxx", "subnet-xxxxxx"]
   mysql_username             = "giuseppe"

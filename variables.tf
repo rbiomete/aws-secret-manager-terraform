@@ -32,7 +32,3 @@ variable "mysql_port" {
 variable "mysql_dbInstanceIdentifier" {
   description = "The RDS Identifier in the webconsole"
 }
-variable "secret_name" {
-  description = "The name of the secret"
-  
-}
