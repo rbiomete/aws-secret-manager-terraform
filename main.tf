@@ -230,9 +230,9 @@ resource "aws_kms_alias" "secret" {
 
 
 
-resource "aws_secretsmanager_secret" "secret" {
+resource "aws_secretsmanager_secret_rotation" "secret" {
   description         = var.secret_description
-  kms_key_id          = aws_kms_key.secret.key_id
+  secret_id          = aws_secretsmanager_secret.secret.id
   name                = var.name
   rotation_lambda_arn = aws_lambda_function.rotate-code-mysql.arn
   rotation_rules {
@@ -248,16 +248,16 @@ resource "aws_secretsmanager_secret_version" "secret" {
       "secret_string"
     ]
   }
-  secret_id     = "${aws_secretsmanager_secret.secret.id}"
+  secret_id     = aws_secretsmanager_secret.secret.id
   secret_string = <<EOF
 {
-  "username": "${var.mysql_username}",
-  "engine": "mysql",
-  "dbname": "${var.mysql_dbname}",
-  "host": "${var.mysql_host}",
-  "password": "${var.mysql_password}",
-  "port": ${var.mysql_port},
-  "dbInstanceIdentifier": "${var.mysql_dbInstanceIdentifier}"
+  username: "${var.mysql_username}",
+  engine: mysql,
+  dbname: "${var.mysql_dbname}",
+  host: "${var.mysql_host}",
+  password: "${var.mysql_password}",
+  port: ${var.mysql_port},
+  dbInstanceIdentifier: "${var.mysql_dbInstanceIdentifier}"
 }
 EOF
 }
