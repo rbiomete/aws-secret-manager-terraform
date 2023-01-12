@@ -1,23 +1,14 @@
-This module will create all the resources to store and rotate a MySQL or Aurora password using the AWS Secrets Manager service.
-
-# Prerequisites
-* A VPC with private subnets and accessibilty to AWS Secrets Manager Endpoint, see below for more details.
-* An RDS with MySQL or Aurora already created and reacheable from the private subnets
-
+This module will create  IAM roles/policies, lambda function, kms key and kms alias for secret manager.
+ 
 
 # Usage Example
 ``` hcl
-module "secret-manager-with-rotation" {
-  source                     = "giuseppeborgese/secret-manager-with-rotation/aws"
-  version                    = "<always choose the latest version displayed in the upper right corner of this page>"
-  name                       = "PassRotation" #name of function and other resources
-  rotation_days              = 1
-  subnets_lambda             = ["subnet-xxxxxx", "subnet-xxxxxx"]
-  mysql_username             = "giuseppe"
-  mysql_dbname               = "my_db_name"
-  mysql_host                 =  "mysqlEndpointurl.xxxxxx.us-east-1.rds.amazonaws.com"
-  mysql_password             = "dummy_password_will_we_rotated"
-  mysql_dbInstanceIdentifier = "my_rds_db_identifier"
+module "secmngr" {
+  source         = "rbiomete/secret-manager/aws""
+  security_group = data.aws_security_groups.selected.ids
+  subnets_lambda = [data.aws_subnets.selected.ids[0]]
+  lambda_function_name = var.lambda_function_name
+  kms_alias_name = var.kms_alias_name
 }
 ```
 
