@@ -9,6 +9,8 @@ module "secmngr" {
   subnets_lambda = [data.aws_subnets.selected.ids[0]]
   lambda_function_name = var.lambda_function_name
   kms_alias_name = var.kms_alias_name
+  microservice_role_name = var.microservice_role_name
+
 }
 ```
 

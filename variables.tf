@@ -40,3 +40,8 @@ variable "kms_alias_name" {
   default = "iomete-password_rotation"
  }
    
+variable "microservice_role_name" {
+  description = "Microservice role name which will be used to access to the secret"
+  type        = string
+ }
+  

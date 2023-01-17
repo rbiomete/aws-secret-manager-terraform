@@ -111,7 +111,7 @@ data "aws_iam_policy_document" "kms" {
     ]
     principals {
       type        = "AWS"
-      identifiers = [aws_iam_role.default.arn]
+      identifiers = [aws_iam_role.default.arn, "arn:aws:iam::${data.aws_caller_identity.current.account_id}:role/${var.microservice_role_name}"]
     }
     resources = ["*"]
   }
