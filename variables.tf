@@ -34,10 +34,9 @@ variable "kms_alias_name" {
   type        = string
  }
 
- variable "iam_role_name" {
+ variable "lambda_role_name" {
   description = "IAM role name"
   type        = string
-  default = "iomete-password_rotation"
  }
    
 variable "microservice_role_name" {
