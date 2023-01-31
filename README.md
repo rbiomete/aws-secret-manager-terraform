@@ -10,6 +10,7 @@ module "secmngr" {
   lambda_function_name = var.lambda_function_name
   kms_alias_name = var.kms_alias_name
   microservice_role_name = var.microservice_role_name
+  lambda_role_name = var.lambda_role_name
 
 }
 ```
