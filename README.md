@@ -1,3 +1,7 @@
+⛔️ # DEPRECATED : This is no longer supported.
+
+
+
 This module will create  IAM roles/policies, lambda function, kms key and kms alias for secret manager.
  
 
